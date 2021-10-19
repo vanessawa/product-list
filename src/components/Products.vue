@@ -1,7 +1,7 @@
 <template>
   <article>
-    <img class="prodPic" src="@/assets/gear.jpeg" alt="gear" />
     <div v-for="product in products" :key="product.id">
+      <img class="prodPic" :src="`./assets/${product.id}.jpeg`" alt="gear" />
       <p>{{ product.title }}</p>
       <p>{{ product.manufacturer }}</p>
       <p>{{ product.description }}</p>
