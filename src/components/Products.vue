@@ -1,10 +1,13 @@
 <template>
   <article>
-    <img
-      src="https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F568579521702741676%2F&psig=AOvVaw09uxQBbl2ZfqCZAyEM8Hna&ust=1634727582601000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNicw4up1vMCFQAAAAAdAAAAABAE"
-      alt="gear"
-    />
-    <div></div>
+    <img class="prodPic" src="@/assets/gear.jpeg" alt="gear" />
+    <div v-for="product in products" :key="product.id">
+      <p>{{ product.title }}</p>
+      <p>{{ product.manufacturer }}</p>
+      <p>{{ product.description }}</p>
+      <p>{{ product.netPrice }}</p>
+      <p>{{ product.grossPrice }}</p>
+    </div>
   </article>
 </template>
 
@@ -30,4 +33,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.prodPic {
+  height: 5rem;
+  width: 5rem;
+  background-size: contain;
+}
+</style>
