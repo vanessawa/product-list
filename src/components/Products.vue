@@ -9,9 +9,9 @@
       <p class="gridItem2">{{ product.title }}</p>
       <p class="gridItem3">{{ product.manufacturer }}</p>
       <p class="gridItem4">{{ product.description }}</p>
-      <p class="gridItem5">{{ product.netPrice }}</p>
-      <p class="gridItem6">{{ product.grossPrice }}</p>
-      <button>add to card</button>
+      <p class="gridItem5" v-text="this.parsePrice(product.netPrice)"></p>
+      <p class="gridItem6" v-text="this.parsePrice(product.grossPrice)"></p>
+      <button class="cardBtn">add to card</button>
     </div>
   </article>
 </template>
@@ -30,7 +30,15 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },
+    parsePrice(price) {
+      var formatter = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      });
+      return formatter.format(price);
+    },
   },
+
   mounted() {
     this.loadApi();
   },
@@ -50,6 +58,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 1fr 1fr;
+  padding: 1.5rem;
 }
 
 .gridItem1 {
@@ -90,5 +99,16 @@ export default {
   grid-row-start: 2;
   grid-row-end: 3;
   justify-self: right;
+}
+
+.cardBtn {
+  height: 1.5rem;
+  width: 5.5rem;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-self: flex-end;
+  align-self: flex-end;
 }
 </style>
