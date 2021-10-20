@@ -44,10 +44,9 @@ export default {
       console.log(this.cart);
     },
     cartQuantity(product) {
-      let quantity = this.cart.find((p) => p.id === product.id);
-      console.log(quantity);
-      if (quantity && quantity.lenght >= 0) return quantity.lenght;
-      else return 0;
+      let quantity = this.cart.filter((p) => p.id == product.id);
+      if (quantity && quantity.length >= 1)
+        return quantity.length + "x in cart";
     },
   },
 
