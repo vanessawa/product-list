@@ -1,24 +1,13 @@
-# product-list
+# Product-List
 
-## Project setup
-```
-npm install
-```
+In this coding assignment you see a little online-shop, built in VueJS 3. You see three products that are fetched from an API. You can put these products into the cart and see the cart quantity.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Installation & Usage
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Run `npm install` to install the vue-server.
 
-### Lints and fixes files
-```
-npm run lint
-```
+Run `npm install json-server -g` to install the json-server.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Start the vue-server with `npm run serve`.
+
+Start the json-server server with `json-server --watch db.json`.
