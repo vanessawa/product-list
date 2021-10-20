@@ -5,14 +5,19 @@
       v-for="product in products"
       :key="product.id"
     >
-      <img class="prodPic" :src="`./assets/${product.id}.jpeg`" alt="gear" />
+      <img
+        class="prodPic"
+        :src="require('@/assets/' + product.id + '.jpeg')"
+        alt="gear"
+      />
       <p class="gridItem2">{{ product.title }}</p>
       <p class="gridItem3">{{ product.manufacturer }}</p>
       <p class="gridItem4">{{ product.description }}</p>
       <p class="gridItem5" v-text="this.parsePrice(product.netPrice)"></p>
       <p class="gridItem6" v-text="this.parsePrice(product.grossPrice)"></p>
-      <p class="gridItem7" v-text="cartQuantity(product)"></p>
+      <span>incl. VAT</span>
       <button class="cartBtn" @click="addToCart(product)">Add to cart</button>
+      <p class="gridItem7" v-text="cartQuantity(product)"></p>
     </div>
   </article>
 </template>
@@ -48,6 +53,11 @@ export default {
       if (quantity && quantity.length >= 1)
         return quantity.length + "x in cart";
     },
+    storeToLocalStorage() {
+      const input = this.cart;
+      localStorage.setItem("item", JSON.stringify(input));
+      const output = JSON.parse(localStorage.getItem("item"));
+    },
   },
 
   mounted() {
@@ -59,22 +69,30 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .prodPic {
-  height: 5rem;
-  width: 5rem;
+  height: 6rem;
+  width: 6rem;
   background-size: contain;
+  position: absolute;
 }
 
 .prodDiv {
   border: 2px solid black;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 5ex 5ex auto;
   padding: 1.5rem;
+  grid-gap: 0.3rem;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .gridItem1 {
   grid-column-start: 1;
   grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  justify-content: flex-start;
+  align-self: flex-start;
 }
 
 .gridItem2 {
@@ -92,6 +110,8 @@ export default {
 .gridItem4 {
   grid-column-start: 2;
   grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 5;
   justify-self: left;
   text-align: left;
 }
@@ -127,6 +147,22 @@ export default {
   grid-column-end: 4;
   grid-row-start: 4;
   grid-row-end: 5;
-  justify-self: right;
+  justify-self: flex-end;
+  align-self: flex-end;
+}
+
+@media (max-width: 670px) {
+  .prodDiv {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    grid-template-rows: auto 1ex 2ex auto 2ex 2ex 2ex 2ex;
+  }
+  .prodPic {
+    height: 6rem;
+    width: 6rem;
+    background-size: contain;
+    position: relative;
+  }
 }
 </style>
