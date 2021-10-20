@@ -11,7 +11,8 @@
       <p class="gridItem4">{{ product.description }}</p>
       <p class="gridItem5" v-text="this.parsePrice(product.netPrice)"></p>
       <p class="gridItem6" v-text="this.parsePrice(product.grossPrice)"></p>
-      <button class="cardBtn">add to card</button>
+      <p class="gridItem7" v-text="cartQuantity(product)"></p>
+      <button class="cartBtn" @click="addToCart(product)">Add to cart</button>
     </div>
   </article>
 </template>
@@ -22,6 +23,7 @@ export default {
   data() {
     return {
       products: [],
+      cart: [],
     };
   },
   methods: {
@@ -36,6 +38,16 @@ export default {
         currency: "EUR",
       });
       return formatter.format(price);
+    },
+    addToCart(product) {
+      this.cart.push(product);
+      console.log(this.cart);
+    },
+    cartQuantity(product) {
+      let quantity = this.cart.find((p) => p.id === product.id);
+      console.log(quantity);
+      if (quantity && quantity.lenght >= 0) return quantity.lenght;
+      else return 0;
     },
   },
 
@@ -56,7 +68,7 @@ export default {
 .prodDiv {
   border: 2px solid black;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
   grid-template-rows: 1fr 1fr;
   padding: 1.5rem;
 }
@@ -101,7 +113,7 @@ export default {
   justify-self: right;
 }
 
-.cardBtn {
+.cartBtn {
   height: 1.5rem;
   width: 5.5rem;
   grid-column-start: 3;
@@ -110,5 +122,12 @@ export default {
   grid-row-end: 4;
   justify-self: flex-end;
   align-self: flex-end;
+}
+.gridItem7 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  justify-self: right;
 }
 </style>
