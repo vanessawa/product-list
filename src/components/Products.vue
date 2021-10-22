@@ -1,7 +1,13 @@
 <template>
   <article class="container">
     <div
-      class="row row-cols-1 row-cols-md-3 p-2 mb-4 bg-light bg-gradient"
+      class="
+        row row-cols-1 row-cols-md-3
+        p-2
+        mb-4
+        bg-light bg-gradient
+        text-start
+      "
       v-for="product in products"
       :key="product.id"
     >
@@ -13,7 +19,7 @@
         />
       </div>
       <div class="col-12 col-md-8">
-        <p>{{ product.title }}</p>
+        <p class="fs-4 fw-bold">{{ product.title }}</p>
         <p>{{ product.manufacturer }}</p>
         <p>{{ product.description }}</p>
       </div>
@@ -58,6 +64,7 @@ export default {
     addToCart(product) {
       this.cart.push(product);
       console.log(this.cart);
+      localStorage.setItem("cartStorage", JSON.stringify(this.cart));
     },
     cartQuantity(product) {
       let quantity = this.cart.filter((p) => p.id == product.id);
@@ -68,6 +75,13 @@ export default {
 
   mounted() {
     this.loadApi();
+
+    let storage = localStorage.getItem("cartStorage");
+    if (storage) {
+      this.cart = JSON.parse(localStorage.getItem("cartStorage"));
+    } else {
+      this.cart = [];
+    }
   },
 };
 </script>
