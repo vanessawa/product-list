@@ -37,7 +37,7 @@
         >
           Add to cart
         </button>
-        <p v-text="cartQuantity(product)"></p>
+        <p id="quantity" v-text="cartQuantity(product)"></p>
       </div>
     </div>
   </article>
