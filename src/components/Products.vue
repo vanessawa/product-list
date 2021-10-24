@@ -30,7 +30,11 @@
           <span> incl. VAT</span>
         </p>
 
-        <button class="btn btn-sm btn-secondary" @click="addToCart(product)">
+        <button
+          id="add-btn"
+          class="btn btn-sm btn-secondary"
+          @click="addToCart(product)"
+        >
           Add to cart
         </button>
         <p v-text="cartQuantity(product)"></p>
