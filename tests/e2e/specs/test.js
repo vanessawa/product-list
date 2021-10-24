@@ -1,5 +1,3 @@
-const { vModelDynamic } = require("@vue/runtime-dom");
-
 // https://docs.cypress.io/api/introduction/api.html
 describe("general", () => {
   beforeEach(() => {

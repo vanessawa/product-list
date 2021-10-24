@@ -11,3 +11,9 @@ Run `npm install json-server -g` to install the json-server.
 Start the vue-server with `npm run serve`.
 
 Start the json-server server with `json-server --watch db.json`.
+
+## Testing
+
+Install cypress with `npm install cypress --global`
+
+Run the e2e-test with `cypress run`
